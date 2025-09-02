@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-4 md:space-x-6">
           {/* Resume Button */}
           <a
-            href="/resume.pdf"
+            href="/harshit_resume.pdf"
             download
             className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-orange-400 to-pink-500 text-white rounded-full shadow-md hover:scale-105 hover:shadow-lg transition-all"
           >

@@ -104,7 +104,7 @@ export default function Home() {
                 <Github className="w-8 h-8" />
               </a>
               <a
-                href="/resume.pdf"
+                href="/harshit_resume.pdf"
                 download
                 className="text-gray-800 hover:text-red-600 hover:scale-110 transition"
               >
