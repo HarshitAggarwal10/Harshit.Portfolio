@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Project1 from "../assets/cmv.png";
 import Project2 from "../assets/osc.png";
 import Project3 from "../assets/cid.png";
@@ -50,111 +51,51 @@ const Projects: React.FC = () => {
         Projects
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-        {/* Column 1 */}
-        <div className="flex flex-col gap-6">
-          {[projects[0], projects[1]].map((project, i) => (
-            <a
-              key={i}
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-white/40 backdrop-blur-md border border-white/30 shadow-lg rounded-xl overflow-hidden flex flex-col transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-            >
+      {/* Masonry-style grid */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        {projects.map((project, i) => (
+          <motion.a
+            key={i}
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: i * 0.15 }}
+            className="relative block break-inside-avoid bg-white/40 backdrop-blur-md border border-white/30 shadow-lg rounded-xl overflow-hidden group hover:shadow-2xl"
+          >
+            <div className="relative">
               <img
                 src={project.img}
                 alt={project.title}
-                className="w-full h-80 object-cover"
+                className="w-full h-auto object-cover rounded-t-xl"
               />
-              <div className="p-4 flex flex-col gap-2">
-                <h2 className="font-semibold text-lg text-gray-900">
-                  {project.title}
-                </h2>
-                <p className="text-gray-700 text-sm">{project.desc}</p>
-                <div className="flex gap-2 mt-2 flex-wrap">
-                  {project.tech.map((t, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded-full"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                <span className="px-4 py-2 bg-gradient-to-r from-orange-400 to-pink-500 text-white text-sm font-semibold rounded-full shadow-lg">
+                  View Project
+                </span>
               </div>
-            </a>
-          ))}
-        </div>
+            </div>
 
-        {/* Column 2 */}
-        <div className="flex flex-col gap-6">
-          {[projects[2]].map((project, i) => (
-            <a
-              key={i}
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-white/40 backdrop-blur-md border border-white/30 shadow-lg rounded-xl overflow-hidden flex flex-col transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-            >
-              <img
-                src={project.img}
-                alt={project.title}
-                className="w-full h-204 object-cover"
-              />
-              <div className="p-4 flex flex-col gap-2">
-                <h2 className="font-semibold text-lg text-gray-900">
-                  {project.title}
-                </h2>
-                <p className="text-gray-700 text-sm">{project.desc}</p>
-                <div className="flex gap-2 mt-2 flex-wrap">
-                  {project.tech.map((t, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded-full"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
+            <div className="p-4 flex flex-col gap-2">
+              <h2 className="font-semibold text-lg text-gray-900">
+                {project.title}
+              </h2>
+              <p className="text-gray-700 text-sm">{project.desc}</p>
+              <div className="flex gap-2 mt-2 flex-wrap">
+                {project.tech.map((t, idx) => (
+                  <span
+                    key={idx}
+                    className="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-orange-200 to-pink-200 text-gray-900 font-medium shadow-sm"
+                  >
+                    {t}
+                  </span>
+                ))}
               </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Column 3 */}
-        <div className="flex flex-col gap-6">
-          {[projects[3], projects[4]].map((project, i) => (
-            <a
-              key={i}
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-white/40 backdrop-blur-md border border-white/30 shadow-lg rounded-xl overflow-hidden flex flex-col transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-            >
-              <img
-                src={project.img}
-                alt={project.title}
-                className="w-full h-80 object-cover"
-              />
-              <div className="p-4 flex flex-col gap-2">
-                <h2 className="font-semibold text-lg text-gray-900">
-                  {project.title}
-                </h2>
-                <p className="text-gray-700 text-sm">{project.desc}</p>
-                <div className="flex gap-2 mt-2 flex-wrap">
-                  {project.tech.map((t, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded-full"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
+            </div>
+          </motion.a>
+        ))}
       </div>
     </div>
   );

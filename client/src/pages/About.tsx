@@ -1,14 +1,24 @@
 import React from "react";
-import { Github, Linkedin, Mail, Code } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Code,
+  Server,
+  Database,
+  Terminal,
+  Cpu,
+  Boxes,
+} from "lucide-react";
+import { GraduationCap, Briefcase, Sparkles, Trophy } from "lucide-react";
 import MyImage from "../assets/About.png"; // Right side image
 import Harshit from "../assets/harshit.png"; // Left side personal photo
 
 const About: React.FC = () => {
   return (
     <div className="w-full min-h-screen flex flex-col lg:flex-row bg-gradient-to-b from-[#FA8F5A] to-[#F9D9B9] p-4 sm:p-8 lg:p-12 overflow-hidden">
-      
       {/* Left Side: Personal Info + Scrollable Details */}
-      <div className="w-full lg:w-1/2 flex flex-col p-4 sm:p-8 md:p-12 mt-10">
+      <div className="w-full lg:w-1/2 flex flex-col p-4 sm:p-8 md:p-12 mt-15">
         <h1 className="text-4xl sm:text-5xl md:text-4xl lg:text-5xl font-serif font-extrabold text-black mb-8">
           About Me
         </h1>
@@ -42,7 +52,7 @@ const About: React.FC = () => {
             {/* Social Icons */}
             <div className="flex gap-3">
               <a
-                href="https://github.com/harshit-aggarwal-100306"
+                href="https://github.com/HarshitAggarwal10"
                 target="_blank"
                 rel="noreferrer"
                 className="p-2 bg-gray-100 rounded-full shadow hover:bg-gray-200 transition"
@@ -50,7 +60,7 @@ const About: React.FC = () => {
                 <Github className="w-6 h-6 text-gray-800" />
               </a>
               <a
-                href="https://linkedin.com/in/harshit-aggarwal-100306"
+                href="https://www.linkedin.com/in/harshit-aggarwal100306/"
                 target="_blank"
                 rel="noreferrer"
                 className="p-2 bg-gray-100 rounded-full shadow hover:bg-gray-200 transition"
@@ -58,7 +68,7 @@ const About: React.FC = () => {
                 <Linkedin className="w-6 h-6 text-blue-600" />
               </a>
               <a
-                href="mailto:harshit@example.com"
+                href="mailto:harshitaggarwal100306@gmail.com"
                 className="p-2 bg-gray-100 rounded-full shadow hover:bg-gray-200 transition"
               >
                 <Mail className="w-6 h-6 text-orange-500" />
@@ -67,14 +77,14 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        {/* Scrollable Content */}
-        <div className="flex-1 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 rounded-xl shadow-lg bg-white/40 backdrop-blur-md border border-white/30 p-6 space-y-6 font-sans">
+        {/* Scrollable Content (unchanged) */}
+        <div className="flex-1 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-orange-400 scrollbar-track-orange-100 rounded-xl shadow-lg bg-white/40 backdrop-blur-md border border-white/30 p-6 space-y-6 font-sans">
           {/* Education */}
-          <section className="p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Education
+          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-orange-400 hover:shadow-xl transition">
+            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-3">
+              <GraduationCap className="w-5 h-5 text-orange-500" /> Education
             </h3>
-            <ul className="list-disc list-inside text-gray-800 space-y-1">
+            <ul className="list-disc list-inside text-gray-800 space-y-1 pl-2">
               <li>
                 B.E. in Computer Science – Chitkara University, Punjab
                 (2023–2027)
@@ -83,78 +93,66 @@ const About: React.FC = () => {
           </section>
 
           {/* Work Experience */}
-          <section className="p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Work Experience
+          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-pink-400 hover:shadow-xl transition">
+            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-3">
+              <Briefcase className="w-5 h-5 text-pink-500" /> Work Experience
             </h3>
-            <ul className="list-disc list-inside text-gray-800 space-y-2">
+            <ul className="list-disc list-inside text-gray-800 space-y-2 pl-2">
               <li>
                 Web Team Member @OpenSourceChandigarh – 2024-2025
                 <p className="text-gray-600 text-sm mt-1 pl-5">
-                  Contributed to various open-source projects and collaborated
-                  with a team of developers.
+                  Contributed to open-source projects and collaborated with
+                  developers worldwide.
                 </p>
               </li>
-              <li>Lead multiple Project Teams</li>
+              <li>Led multiple project teams with successful deliveries.</li>
             </ul>
           </section>
 
           {/* Skills */}
-          <section className="p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              Skills
+          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-red-400 hover:shadow-xl transition">
+            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-4">
+              <Sparkles className="w-5 h-5 text-red-500" /> Skills
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1 flex items-center gap-1">
-                  Frontend
-                </h4>
+              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
+                <h4 className="font-semibold text-gray-800 mb-1">Frontend</h4>
                 <p className="text-gray-700 text-sm">
-                  React, Tailwind CSS, BootStrap, Framer-Motion, Typescript
+                  React, Tailwind CSS, Framer-Motion, TypeScript
                 </p>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1 flex items-center gap-1">
-                  Backend
-                </h4>
+              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
+                <h4 className="font-semibold text-gray-800 mb-1">Backend</h4>
                 <p className="text-gray-700 text-sm">
                   Node.js, Express.js, REST APIs
                 </p>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1 flex items-center gap-1">
-                  Database
-                </h4>
+              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
+                <h4 className="font-semibold text-gray-800 mb-1">Database</h4>
                 <p className="text-gray-700 text-sm">MongoDB, MySQL</p>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1 flex items-center gap-1">
-                  Programming Languages
-                </h4>
+              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
+                <h4 className="font-semibold text-gray-800 mb-1">Languages</h4>
                 <p className="text-gray-700 text-sm">
                   JavaScript, TypeScript, C++, Java
                 </p>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1 flex items-center gap-1">
-                  Tools & Others
-                </h4>
-                <p className="text-gray-700 text-sm">
-                  Git, GitHub, VS Code
-                </p>
+              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
+                <h4 className="font-semibold text-gray-800 mb-1">Tools</h4>
+                <p className="text-gray-700 text-sm">Git, GitHub, VS Code</p>
               </div>
             </div>
           </section>
 
           {/* Achievements */}
-          <section className="p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Achievements
+          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-yellow-400 hover:shadow-xl transition">
+            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-3">
+              <Trophy className="w-5 h-5 text-yellow-500" /> Achievements
             </h3>
-            <ul className="list-disc list-inside text-gray-800 space-y-1">
-              <li>Name in Dean's List for STAR PROGRAMMER</li>
-              <li>Hack The Mountains held in Rajkot, Gujarat finalist</li>
-              <li>Open-source contributor on GitHub</li>
+            <ul className="list-disc list-inside text-gray-800 space-y-2 pl-2">
+              <li>Dean's List – STAR PROGRAMMER recognition</li>
+              <li>Hack The Mountains 2024 (Rajkot, Gujarat) – Finalist</li>
+              <li>Active Open-source contributor on GitHub</li>
             </ul>
           </section>
         </div>
@@ -169,28 +167,48 @@ const About: React.FC = () => {
           and building projects that make an impact.
         </p>
 
+        {/* 🔥 Unique Tech Stack Showcase (minimal + polished) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
+          {[
+            { name: "Frontend (React)", icon: <Code className="w-8 h-8" /> },
+            { name: "Backend (Node.js)", icon: <Server className="w-8 h-8" /> },
+            {
+              name: "Database (MongoDB)",
+              icon: <Database className="w-8 h-8" />,
+            },
+            { name: "TypeScript", icon: <Terminal className="w-8 h-8" /> },
+            { name: "C++", icon: <Cpu className="w-8 h-8" /> },
+            { name: "Project Management", icon: <Boxes className="w-8 h-8" /> },
+          ].map((tech, i) => (
+            <div
+              key={i}
+              className="p-4 rounded-xl text-center shadow-lg bg-white/30 backdrop-blur-md border border-orange-200 text-gray-900 font-medium transform transition hover:scale-105 hover:shadow-xl animate-float"
+            >
+              <div className="flex justify-center text-orange-500 mb-2">
+                {tech.icon}
+              </div>
+              <p className="text-sm">{tech.name}</p>
+            </div>
+          ))}
+        </div>
+
         <img
           src={MyImage}
           alt="Illustration"
-          className="w-full sm:w-96 md:w-[38rem] h-64 sm:h-80 md:h-[22rem] rounded-2xl object-cover shadow-lg mt-10"
+          className="w-full sm:w-156 md:w-[38rem] h-64 sm:h-80 md:h-[22rem] rounded-2xl object-cover shadow-lg mt-4"
         />
       </div>
 
-      {/* Scrollbar Styling */}
+      {/* Scrollbar Styling & Floating Animation */}
       <style>
         {`
-          .scrollbar-gradient::-webkit-scrollbar {
-            width: 6px;
+          @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
           }
-          .scrollbar-gradient::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          .scrollbar-gradient::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #FA8F5A, #F472B6);
-            border-radius: 9999px;
-          }
-          .scrollbar-gradient::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #F472B6, #FA8F5A);
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
           }
         `}
       </style>
