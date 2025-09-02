@@ -17,6 +17,9 @@ const mongoUri = process.env.MONGO_URI;
 if (!mongoUri) {
     throw new Error("❌ MONGO_URI is not defined in .env file");
 }
+else {
+    console.log(`✅ MONGO_URI is defined: ${mongoUri}`);
+}
 mongoose_1.default
     .connect(mongoUri)
     .then(() => {

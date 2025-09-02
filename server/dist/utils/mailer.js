@@ -6,8 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMail = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const sendMail = async (to, subject, text) => {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        throw new Error("Missing email credentials");
+    }
     const transporter = nodemailer_1.default.createTransport({
-        service: "gmail", // or smtp config
+        service: "gmail",
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
