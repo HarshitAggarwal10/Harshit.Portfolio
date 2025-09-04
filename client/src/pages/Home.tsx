@@ -1,14 +1,17 @@
-import { Github, Linkedin, Download, Layers, Database, Code } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Download,
+  Layers,
+  Database,
+  Code,
+} from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import Harshit from "../assets/harshit.png";
 
 export default function Home() {
   const roles = useMemo(
-    () => [
-      "Full-Stack Developer",
-      "MERN Enthusiast",
-      "Problem Solver",
-    ],
+    () => ["Full-Stack Developer", "MERN Enthusiast", "Problem Solver"],
     []
   );
 
@@ -65,10 +68,18 @@ export default function Home() {
 
             <p className="fade-in delay-200 mt-6 text-lg md:text-xl text-gray-800/90 max-w-xl mx-auto md:mx-0 leading-relaxed font-medium">
               I’m a passionate developer who loves creating impactful{" "}
-              <span className="text-orange-700 font-semibold">web experiences</span>. I enjoy building{" "}
-              <span className="text-pink-700 font-semibold">full-stack applications</span>{" "}
+              <span className="text-orange-700 font-semibold">
+                web experiences
+              </span>
+              . I enjoy building{" "}
+              <span className="text-pink-700 font-semibold">
+                full-stack applications
+              </span>{" "}
               and designing{" "}
-              <span className="text-red-600 font-semibold">user-friendly interfaces</span>.
+              <span className="text-red-600 font-semibold">
+                user-friendly interfaces
+              </span>
+              .
             </p>
 
             {/* CTA Buttons */}
@@ -114,39 +125,54 @@ export default function Home() {
           </div>
 
           {/* Tech Focus Card */}
-          <div className="tech-card w-full md:w-[80%] bg-white/80 backdrop-blur-lg border-2 border-transparent rounded-2xl shadow-xl p-6 flex flex-col space-y-4 animate-slideIn relative overflow-hidden">
+          <div className="tech-card w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl bg-white/80 backdrop-blur-lg border-2 border-transparent rounded-2xl shadow-xl p-4 sm:p-6 flex flex-col space-y-4 animate-slideIn relative overflow-hidden transition-all duration-300">
             {/* Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-red-500 rounded-t-2xl"></div>
 
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Tech Focus</h3>
+            {/* Card Heading */}
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 text-center md:text-left">
+              Tech Focus
+            </h3>
 
-            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-orange-50 transition">
+            {/* ====== Tech Item 1 ====== */}
+            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-orange-50 transition duration-300">
               <div className="flex items-center space-x-3">
-                <Layers className="text-orange-600 w-6 h-6 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
-                <span className="font-semibold text-gray-800">Full-Stack Development</span>
+                <Layers className="text-orange-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
+                <span className="font-semibold text-gray-800 text-sm sm:text-base md:text-lg">
+                  Full-Stack Development
+                </span>
               </div>
-              <p className="max-h-0 overflow-hidden text-sm text-gray-600 transition-all duration-500 group-hover:max-h-20">
-                Building scalable applications from front-end to back-end with modern tools and frameworks.
+              <p className="max-h-0 overflow-hidden text-xs sm:text-sm md:text-base text-gray-600 transition-all duration-500 group-hover:max-h-20">
+                Building scalable applications from front-end to back-end with
+                modern tools and frameworks.
               </p>
             </div>
 
-            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-pink-50 transition">
+            {/* ====== Tech Item 2 ====== */}
+            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-pink-50 transition duration-300">
               <div className="flex items-center space-x-3">
-                <Database className="text-pink-600 w-6 h-6 transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110" />
-                <span className="font-semibold text-gray-800">MERN Stack</span>
+                <Database className="text-pink-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110" />
+                <span className="font-semibold text-gray-800 text-sm sm:text-base md:text-lg">
+                  MERN Stack
+                </span>
               </div>
-              <p className="max-h-0 overflow-hidden text-sm text-gray-600 transition-all duration-500 group-hover:max-h-20">
-                Expertise in MongoDB, Express.js, React, and Node.js for end-to-end web solutions.
+              <p className="max-h-0 overflow-hidden text-xs sm:text-sm md:text-base text-gray-600 transition-all duration-500 group-hover:max-h-20">
+                Expertise in MongoDB, Express.js, React, and Node.js for
+                end-to-end web solutions.
               </p>
             </div>
 
-            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-red-50 transition">
+            {/* ====== Tech Item 3 ====== */}
+            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-red-50 transition duration-300">
               <div className="flex items-center space-x-3">
-                <Code className="text-red-600 w-6 h-6 transition-transform duration-500 group-hover:translate-y-1 group-hover:scale-110" />
-                <span className="font-semibold text-gray-800">Programming & Problem Solving</span>
+                <Code className="text-red-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:translate-y-1 group-hover:scale-110" />
+                <span className="font-semibold text-gray-800 text-sm sm:text-base md:text-lg">
+                  Programming & Problem Solving
+                </span>
               </div>
-              <p className="max-h-0 overflow-hidden text-sm text-gray-600 transition-all duration-500 group-hover:max-h-20">
-                Strong foundation in algorithms, data structures, and competitive coding challenges.
+              <p className="max-h-0 overflow-hidden text-xs sm:text-sm md:text-base text-gray-600 transition-all duration-500 group-hover:max-h-20">
+                Strong foundation in algorithms, data structures, and
+                competitive coding challenges.
               </p>
             </div>
           </div>
