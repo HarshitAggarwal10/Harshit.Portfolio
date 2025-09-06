@@ -19,13 +19,17 @@ const About: React.FC = () => {
     <div className="w-full min-h-screen bg-gradient-to-br from-[#FFE5D4] via-[#FFD1B7] to-[#FFB891] p-4 sm:p-6 lg:p-8 overflow-hidden">
       <div className="max-w-7xl mx-auto mt-10">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 w-full mt-6 md:mt-8">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 w-full mt-16 sm:mt-20 md:mt-8">
           {/* Left Section - About Me */}
           <div className="w-full md:w-1/2 text-left">
             <div className="mb-6 md:mb-10">
               <h1 className="text-4xl sm:text-5xl font-bold text-[#7A4A3B] mb-4">
                 About Me
               </h1>
+              {/* Decorative Line Below the Heading */}
+              <div className="w-16 h-1 bg-[#7A4A3B] rounded mb-4"></div>
+
               <p className="text-lg text-[#9C6B58] max-w-lg">
                 Full-Stack Developer passionate about creating impactful digital
                 experiences
