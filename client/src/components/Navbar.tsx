@@ -9,11 +9,14 @@ import {
   Briefcase,
   Mail,
   Cpu,
+  AlertTriangle,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showError, setShowError] = useState(false); // Resume error modal
   const location = useLocation();
 
   const navItems = [
@@ -24,6 +27,11 @@ export default function Navbar() {
     { name: "Skills", path: "/skills", icon: <Cpu className="w-5 h-5" /> },
     { name: "Contact", path: "/contact", icon: <Mail className="w-5 h-5" /> },
   ];
+
+  const handleResumeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowError(true);
+  };
 
   return (
     <>
@@ -60,14 +68,13 @@ export default function Navbar() {
         {/* Right - Resume + Mobile Menu Button */}
         <div className="flex items-center space-x-4">
           {/* Resume Button */}
-          <a
-            href="/harshit_resume.pdf"
-            download
+          <button
+            onClick={handleResumeClick}
             className="hidden md:flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-orange-400 to-pink-500 text-white rounded-full shadow-md hover:scale-105 hover:shadow-lg transition-all"
           >
             <Download className="w-5 h-5" />
             <span className="text-sm font-semibold">Resume</span>
-          </a>
+          </button>
 
           {/* Mobile Menu Icon */}
           <button
@@ -106,14 +113,69 @@ export default function Navbar() {
         ))}
 
         {/* Resume Button in Mobile Menu */}
-        <a
-          href="/harshit_resume.pdf"
-          download
+        <button
+          onClick={handleResumeClick}
           className="mt-6 px-6 py-3 bg-gradient-to-r from-orange-400 to-pink-500 text-white rounded-full shadow-lg hover:scale-105 transition"
         >
           Download Resume
-        </a>
+        </button>
       </div>
+
+      {/* ===== Resume 404 Error Modal ===== */}
+      <AnimatePresence>
+        {showError && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full relative"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowError(false)}
+                className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Icon */}
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                  <AlertTriangle className="w-10 h-10 text-red-500" />
+                </div>
+              </div>
+
+              {/* Title */}
+              <h2 className="text-2xl font-bold text-gray-800 text-center mb-2">
+                404 Error
+              </h2>
+
+              {/* Message */}
+              <p className="text-center text-gray-600 mb-6">
+                Oops! The resume file you are trying to download doesn’t exist
+                right now. Please check back later.
+              </p>
+
+              {/* Action Button */}
+              <div className="flex justify-center">
+                <button
+                  onClick={() => setShowError(false)}
+                  className="px-6 py-2 bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                >
+                  Go Back
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

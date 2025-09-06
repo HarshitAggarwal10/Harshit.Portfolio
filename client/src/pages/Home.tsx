@@ -5,8 +5,11 @@ import {
   Layers,
   Database,
   Code,
+  AlertTriangle,
+  X,
 } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Harshit from "../assets/harshit.png";
 
 export default function Home() {
@@ -19,6 +22,7 @@ export default function Home() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showError, setShowError] = useState(false); // Resume 404 modal
 
   useEffect(() => {
     const currentRole = roles[roleIndex];
@@ -41,6 +45,11 @@ export default function Home() {
 
     return () => clearTimeout(timeout);
   }, [charIndex, isDeleting, roleIndex, roles]);
+
+  const handleResumeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowError(true);
+  };
 
   return (
     <main className="pt-40 w-full h-screen flex items-start justify-center font-[Inter] mt-10">
@@ -114,13 +123,12 @@ export default function Home() {
               >
                 <Github className="w-8 h-8" />
               </a>
-              <a
-                href="/harshit_resume.pdf"
-                download
+              <button
+                onClick={handleResumeClick}
                 className="text-gray-800 hover:text-red-600 hover:scale-110 transition"
               >
                 <Download className="w-8 h-8" />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -134,7 +142,7 @@ export default function Home() {
               Tech Focus
             </h3>
 
-            {/* ====== Tech Item 1 ====== */}
+            {/* Tech Items */}
             <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-orange-50 transition duration-300">
               <div className="flex items-center space-x-3">
                 <Layers className="text-orange-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
@@ -148,7 +156,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* ====== Tech Item 2 ====== */}
             <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-pink-50 transition duration-300">
               <div className="flex items-center space-x-3">
                 <Database className="text-pink-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110" />
@@ -162,7 +169,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* ====== Tech Item 3 ====== */}
             <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-red-50 transition duration-300">
               <div className="flex items-center space-x-3">
                 <Code className="text-red-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:translate-y-1 group-hover:scale-110" />
@@ -180,12 +186,10 @@ export default function Home() {
 
         {/* Right - Picture */}
         <div className="flex-1 flex justify-center md:justify-end mt-12 md:mt-0 relative">
-          {/* Gradient Glow Behind */}
           <div className="absolute inset-0 flex justify-center md:justify-end items-end">
             <div className="w-80 md:w-[420px] h-[520px] rounded-3xl bg-gradient-to-tr from-pink-500 to-orange-400 opacity-30 blur-3xl"></div>
           </div>
 
-          {/* Image */}
           <img
             src={Harshit}
             alt="Harshit Aggarwal portrait"
@@ -194,7 +198,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Animations */}
+      {/* ===== Resume 404 Error Modal ===== */}
+      <AnimatePresence>
+        {showError && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full relative"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                onClick={() => setShowError(false)}
+                className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                  <AlertTriangle className="w-10 h-10 text-red-500" />
+                </div>
+              </div>
+
+              <h2 className="text-2xl font-bold text-gray-800 text-center mb-2">
+                404 Error
+              </h2>
+
+              <p className="text-center text-gray-600 mb-6">
+                Oops! The resume file you are trying to download doesn’t exist right
+                now. Please check back later.
+              </p>
+
+              <div className="flex justify-center">
+                <button
+                  onClick={() => setShowError(false)}
+                  className="px-6 py-2 bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                >
+                  Go Back
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ===== Animations & Styles ===== */}
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600&display=swap');
@@ -208,28 +263,20 @@ export default function Home() {
             animation: float 5s ease-in-out infinite;
           }
 
-          /* Fade + Slide Animation */
           .fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeSlideUp 1s ease-out forwards;
           }
-          .fade-in.delay-200 {
-            animation-delay: 0.2s;
-          }
-          .fade-in.delay-300 {
-            animation-delay: 0.3s;
-          }
-          .fade-in.delay-400 {
-            animation-delay: 0.4s;
-          }
+          .fade-in.delay-200 { animation-delay: 0.2s; }
+          .fade-in.delay-300 { animation-delay: 0.3s; }
+          .fade-in.delay-400 { animation-delay: 0.4s; }
 
           @keyframes fadeSlideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
           }
 
-          /* Glow Animation for CTA */
           @keyframes glowPulse {
             0% { box-shadow: 0 0 8px rgba(251,140,92,0.6), 0 0 15px rgba(249,205,163,0.4); }
             50% { box-shadow: 0 0 16px rgba(249,83,109,0.8), 0 0 25px rgba(249,205,163,0.6); }
@@ -239,7 +286,6 @@ export default function Home() {
             animation: glowPulse 3s infinite ease-in-out;
           }
 
-          /* Slide In Animation for Card */
           @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-60px); }
             to { opacity: 1; transform: translateX(0); }
@@ -248,7 +294,6 @@ export default function Home() {
             animation: slideInLeft 1s ease-out forwards;
           }
 
-          /* Blinking Cursor */
           .blinking-cursor {
             display: inline-block;
             margin-left: 2px;
