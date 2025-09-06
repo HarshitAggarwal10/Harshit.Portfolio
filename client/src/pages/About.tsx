@@ -11,207 +11,278 @@ import {
   Boxes,
 } from "lucide-react";
 import { GraduationCap, Briefcase, Sparkles, Trophy } from "lucide-react";
-import MyImage from "../assets/About.png"; // Right side image
-import Harshit from "../assets/harshit.png"; // Left side personal photo
+import MyImage from "../assets/About.png";
+import Harshit from "../assets/harshit.png";
 
 const About: React.FC = () => {
   return (
-    <div className="w-full min-h-screen flex flex-col lg:flex-row bg-gradient-to-b from-[#FA8F5A] to-[#F9D9B9] p-4 sm:p-8 lg:p-12 overflow-hidden">
-      {/* Left Side: Personal Info + Scrollable Details */}
-      <div className="w-full lg:w-1/2 flex flex-col p-4 sm:p-8 md:p-12 mt-15">
-        <h1 className="text-4xl sm:text-5xl md:text-4xl lg:text-5xl font-serif font-extrabold text-black mb-8">
-          About Me
-        </h1>
-
-        {/* Personal Photo + Info */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10 relative">
-          {/* Profile Photo */}
-          <div className="relative w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full shadow-2xl overflow-hidden">
-            <img
-              src={Harshit}
-              alt="Harshit Aggarwal"
-              className="w-full h-full object-cover rounded-full"
-            />
+    <div className="w-full min-h-screen bg-gradient-to-br from-[#FFE5D4] via-[#FFD1B7] to-[#FFB891] p-4 sm:p-6 lg:p-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto mt-10">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 w-full mt-6 md:mt-8">
+          {/* Left Section - About Me */}
+          <div className="w-full md:w-1/2 text-left">
+            <div className="mb-6 md:mb-10">
+              <h1 className="text-4xl sm:text-5xl font-bold text-[#7A4A3B] mb-4">
+                About Me
+              </h1>
+              <p className="text-lg text-[#9C6B58] max-w-lg">
+                Full-Stack Developer passionate about creating impactful digital
+                experiences
+              </p>
+            </div>
           </div>
 
-          {/* Info Card */}
-          <div className="flex flex-col items-center sm:items-start rounded-xl p-5 w-full sm:w-auto">
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1">
-              Harshit Aggarwal
-            </h2>
-            <p className="text-black text-sm sm:text-base mb-3 flex items-center gap-2">
-              <Code className="w-4 h-4 text-blue-500" /> Full-Stack Developer
-            </p>
-
-            {/* Email with Icon */}
-            <p className="text-black text-sm mb-3 flex items-center gap-2">
-              <Mail className="w-4 h-4 text-red-500" />{" "}
-              harshitaggarwal100306@gmail.com
-            </p>
-
-            {/* Social Icons */}
-            <div className="flex gap-3">
-              <a
-                href="https://github.com/HarshitAggarwal10"
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 bg-gray-100 rounded-full shadow hover:bg-gray-200 transition"
-              >
-                <Github className="w-6 h-6 text-gray-800" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/harshit-aggarwal100306/"
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 bg-gray-100 rounded-full shadow hover:bg-gray-200 transition"
-              >
-                <Linkedin className="w-6 h-6 text-blue-600" />
-              </a>
-              <a
-                href="mailto:harshitaggarwal100306@gmail.com"
-                className="p-2 bg-gray-100 rounded-full shadow hover:bg-gray-200 transition"
-              >
-                <Mail className="w-6 h-6 text-orange-500" />
-              </a>
+          {/* Right Section - Image */}
+          <div className="w-full md:w-1/2 flex justify-center items-center">
+            <div className="overflow-hidden w-full h-[22rem] sm:h-[26rem] md:h-[32rem]">
+              <img
+                src={MyImage}
+                alt="Development Illustration"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>
 
-        {/* Scrollable Content (unchanged) */}
-        <div className="flex-1 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-orange-400 scrollbar-track-orange-100 rounded-xl shadow-lg bg-white/40 backdrop-blur-md border border-white/30 p-6 space-y-6 font-sans">
-          {/* Education */}
-          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-orange-400 hover:shadow-xl transition">
-            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-3">
-              <GraduationCap className="w-5 h-5 text-orange-500" /> Education
-            </h3>
-            <ul className="list-disc list-inside text-gray-800 space-y-1 pl-2">
-              <li>
-                B.E. in Computer Science – Chitkara University, Punjab
-                (2023–2027)
-              </li>
-            </ul>
-          </section>
+        <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
+          {/* Left Column - Profile & Details */}
+          <div className="w-full lg:w-2/5">
+            {/* Profile Card */}
+            <div className="bg-white/90 rounded-2xl shadow-lg p-6 mb-6 border border-orange-100 backdrop-blur-sm">
+              <div className="flex flex-col items-center">
+                <div className="relative w-40 h-40 rounded-full shadow-xl overflow-hidden mb-5 border-4 border-white ring-2 ring-orange-100">
+                  <img
+                    src={Harshit}
+                    alt="Harshit Aggarwal"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
 
-          {/* Work Experience */}
-          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-pink-400 hover:shadow-xl transition">
-            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-3">
-              <Briefcase className="w-5 h-5 text-pink-500" /> Work Experience
-            </h3>
-            <ul className="list-disc list-inside text-gray-800 space-y-2 pl-2">
-              <li>
-                Web Team Member @OpenSourceChandigarh – 2024-2025
-                <p className="text-gray-600 text-sm mt-1 pl-5">
-                  Contributed to open-source projects and collaborated with
-                  developers worldwide.
-                </p>
-              </li>
-              <li>Led multiple project teams with successful deliveries.</li>
-            </ul>
-          </section>
+                <h2 className="text-2xl font-bold text-gray-800 mb-1 text-center">
+                  Harshit Aggarwal
+                </h2>
+                <div className="flex items-center gap-2 text-orange-600 font-medium mb-4">
+                  <Code className="w-5 h-5" />
+                  <span>Full-Stack Developer</span>
+                </div>
 
-          {/* Skills */}
-          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-red-400 hover:shadow-xl transition">
-            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-4">
-              <Sparkles className="w-5 h-5 text-red-500" /> Skills
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                <h4 className="font-semibold text-gray-800 mb-1">Frontend</h4>
-                <p className="text-gray-700 text-sm">
-                  React, Tailwind CSS, Framer-Motion, TypeScript
-                </p>
-              </div>
-              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                <h4 className="font-semibold text-gray-800 mb-1">Backend</h4>
-                <p className="text-gray-700 text-sm">
-                  Node.js, Express.js, REST APIs
-                </p>
-              </div>
-              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                <h4 className="font-semibold text-gray-800 mb-1">Database</h4>
-                <p className="text-gray-700 text-sm">MongoDB, MySQL</p>
-              </div>
-              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                <h4 className="font-semibold text-gray-800 mb-1">Languages</h4>
-                <p className="text-gray-700 text-sm">
-                  JavaScript, TypeScript, C++, Java
-                </p>
-              </div>
-              <div className="bg-white/70 rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                <h4 className="font-semibold text-gray-800 mb-1">Tools</h4>
-                <p className="text-gray-700 text-sm">Git, GitHub, VS Code</p>
+                <div className="w-full bg-orange-100 h-px my-4"></div>
+
+                <div className="w-full space-y-3">
+                  <div className="flex items-center text-gray-700">
+                    <Mail className="w-5 h-5 text-orange-500 mr-3" />
+                    <span className="text-sm truncate">
+                      harshitaggarwal100306@gmail.com
+                    </span>
+                  </div>
+
+                  <div className="flex justify-center gap-4 mt-5">
+                    <a
+                      href="https://github.com/HarshitAggarwal10"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-3 bg-orange-50 rounded-full shadow hover:bg-orange-100 transition transform hover:-translate-y-1"
+                    >
+                      <Github className="w-6 h-6 text-gray-800" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/harshit-aggarwal100306/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-3 bg-orange-50 rounded-full shadow hover:bg-orange-100 transition transform hover:-translate-y-1"
+                    >
+                      <Linkedin className="w-6 h-6 text-blue-600" />
+                    </a>
+                    <a
+                      href="mailto:harshitaggarwal100306@gmail.com"
+                      className="p-3 bg-orange-50 rounded-full shadow hover:bg-orange-100 transition transform hover:-translate-y-1"
+                    >
+                      <Mail className="w-6 h-6 text-orange-500" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </section>
 
-          {/* Achievements */}
-          <section className="p-5 rounded-xl shadow-md bg-white/60 backdrop-blur-lg border-l-4 border-yellow-400 hover:shadow-xl transition">
-            <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-3">
-              <Trophy className="w-5 h-5 text-yellow-500" /> Achievements
-            </h3>
-            <ul className="list-disc list-inside text-gray-800 space-y-2 pl-2">
-              <li>Dean's List – STAR PROGRAMMER recognition</li>
-              <li>Hack The Mountains 2024 (Rajkot, Gujarat) – Finalist</li>
-              <li>Active Open-source contributor on GitHub</li>
-            </ul>
-          </section>
-        </div>
-      </div>
+            {/* Tech Stack */}
+            <div className="bg-white/90 rounded-2xl shadow-lg p-6 border border-orange-100 backdrop-blur-sm">
+              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <Sparkles className="w-5 h-5 text-orange-500 mr-2" />
+                Tech Stack
+              </h3>
 
-      {/* Right Side: About Text + Illustration */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-start p-4 sm:p-8 md:p-12 mt-10 lg:mt-16">
-        <p className="text-lg sm:text-xl md:text-2xl font-light font-serif text-black leading-relaxed mb-6">
-          I am a passionate developer and designer with experience in building
-          full-stack applications, creating visually appealing interfaces, and
-          crafting engaging user experiences. I love solving complex problems
-          and building projects that make an impact.
-        </p>
-
-        {/* 🔥 Unique Tech Stack Showcase (minimal + polished) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
-          {[
-            { name: "Frontend (React)", icon: <Code className="w-8 h-8" /> },
-            { name: "Backend (Node.js)", icon: <Server className="w-8 h-8" /> },
-            {
-              name: "Database (MongoDB)",
-              icon: <Database className="w-8 h-8" />,
-            },
-            { name: "TypeScript", icon: <Terminal className="w-8 h-8" /> },
-            { name: "C++", icon: <Cpu className="w-8 h-8" /> },
-            { name: "Project Management", icon: <Boxes className="w-8 h-8" /> },
-          ].map((tech, i) => (
-            <div
-              key={i}
-              className="p-4 rounded-xl text-center shadow-lg bg-white/30 backdrop-blur-md border border-orange-200 text-gray-900 font-medium transform transition hover:scale-105 hover:shadow-xl animate-float"
-            >
-              <div className="flex justify-center text-orange-500 mb-2">
-                {tech.icon}
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { name: "React", icon: <Code className="w-5 h-5" /> },
+                  { name: "Node.js", icon: <Server className="w-5 h-5" /> },
+                  { name: "MongoDB", icon: <Database className="w-5 h-5" /> },
+                  {
+                    name: "PostgreSQL",
+                    icon: <Database className="w-5 h-5" />,
+                  },
+                  {
+                    name: "TypeScript",
+                    icon: <Terminal className="w-5 h-5" />,
+                  },
+                  { name: "C++", icon: <Cpu className="w-5 h-5" /> },
+                  { name: "Java", icon: <Cpu className="w-5 h-5" /> },
+                  { name: "Git/GitHub", icon: <Boxes className="w-5 h-5" /> },
+                ].map((tech, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 bg-orange-50/70 p-2 rounded-lg text-sm font-medium text-gray-700"
+                  >
+                    <div className="text-orange-500">{tech.icon}</div>
+                    <span>{tech.name}</span>
+                  </div>
+                ))}
               </div>
-              <p className="text-sm">{tech.name}</p>
             </div>
-          ))}
+          </div>
+
+          {/* Right Column - Content & Full-height Image */}
+          <div className="w-full lg:w-3/5">
+            <div className="bg-white/90 rounded-2xl shadow-lg p-6 md:p-8 mb-6 border border-orange-100 backdrop-blur-sm">
+              {/* Introduction */}
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                  My Journey
+                </h2>
+                <p className="text-gray-700 leading-relaxed">
+                  I am a passionate developer and designer with experience in
+                  building full-stack applications, creating visually appealing
+                  interfaces, and crafting engaging user experiences. I love
+                  solving complex problems and building projects that make an
+                  impact.
+                </p>
+              </div>
+
+              {/* Education */}
+              <div className="bg-orange-50/50 rounded-xl p-5 mb-6 border-l-4 border-orange-500">
+                <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-800 mb-4">
+                  <GraduationCap className="w-6 h-6 text-orange-500" />{" "}
+                  Education
+                </h3>
+                <div className="pl-8 relative">
+                  <div className="absolute left-2 top-2 w-0.5 h-full bg-orange-300"></div>
+                  <div className="relative mb-4">
+                    <div className="absolute -left-8 top-1.5 w-4 h-4 rounded-full bg-orange-500"></div>
+                    <h4 className="font-medium text-gray-800">
+                      B.E. in Computer Science
+                    </h4>
+                    <p className="text-gray-600">
+                      Chitkara University, Punjab (2023–2027)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Work Experience */}
+              <div className="bg-orange-50/50 rounded-xl p-5 mb-6 border-l-4 border-orange-600">
+                <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-800 mb-4">
+                  <Briefcase className="w-6 h-6 text-orange-600" /> Work
+                  Experience
+                </h3>
+                <div className="pl-8 relative">
+                  <div className="absolute left-2 top-2 w-0.5 h-full bg-orange-300"></div>
+                  <div className="relative mb-5">
+                    <div className="absolute -left-8 top-1.5 w-4 h-4 rounded-full bg-orange-600"></div>
+                    <h4 className="font-medium text-gray-800">
+                      Web Team Member @OpenSourceChandigarh
+                    </h4>
+                    <p className="text-gray-600 mb-2">2024-2025</p>
+                    <p className="text-gray-700 text-sm bg-orange-100/50 p-3 rounded-lg">
+                      Contributed to open-source projects and collaborated with
+                      developers worldwide.
+                    </p>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute -left-8 top-1.5 w-4 h-4 rounded-full bg-orange-600"></div>
+                    <h4 className="font-medium text-gray-800">
+                      Project Team Leadership
+                    </h4>
+                    <p className="text-gray-700">
+                      Led multiple project teams with successful deliveries.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Skills */}
+              <div className="bg-orange-50/50 rounded-xl p-5 mb-6 border-l-4 border-orange-700">
+                <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-800 mb-4">
+                  <Sparkles className="w-6 h-6 text-orange-700" /> Skills
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="bg-white/70 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center">
+                      <Code className="w-4 h-4 mr-2 text-orange-600" /> Frontend
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      React, Tailwind CSS, Framer-Motion, TypeScript
+                    </p>
+                  </div>
+                  <div className="bg-white/70 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center">
+                      <Server className="w-4 h-4 mr-2 text-orange-600" />{" "}
+                      Backend
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      Node.js, Express.js, REST APIs
+                    </p>
+                  </div>
+                  <div className="bg-white/70 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center">
+                      <Database className="w-4 h-4 mr-2 text-orange-600" />{" "}
+                      Database
+                    </h4>
+                    <p className="text-gray-700 text-sm">MongoDB, MySQL</p>
+                  </div>
+                  <div className="bg-white/70 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center">
+                      <Terminal className="w-4 h-4 mr-2 text-orange-600" />{" "}
+                      Languages
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      JavaScript, TypeScript, C++, Java
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Achievements */}
+              <div className="bg-orange-50/50 rounded-xl p-5 border-l-4 border-amber-600">
+                <h3 className="flex items-center gap-2 text-xl font-semibold text-gray-800 mb-4">
+                  <Trophy className="w-6 h-6 text-amber-600" /> Achievements
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-amber-600 mr-3"></div>
+                    <p className="text-gray-700">
+                      Dean's List – STAR PROGRAMMER recognition
+                    </p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-amber-600 mr-3"></div>
+                    <p className="text-gray-700">
+                      Hack The Mountains 2024 (Rajkot, Gujarat) – Finalist
+                    </p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-amber-600 mr-3"></div>
+                    <p className="text-gray-700">
+                      Active Open-source contributor on GitHub
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <img
-          src={MyImage}
-          alt="Illustration"
-          className="w-full sm:w-156 md:w-[38rem] h-64 sm:h-80 md:h-[22rem] rounded-2xl object-cover shadow-lg mt-4"
-        />
+        {/* Full-width Image Section */}
       </div>
-
-      {/* Scrollbar Styling & Floating Animation */}
-      <style>
-        {`
-          @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-          }
-          .animate-float {
-            animation: float 3s ease-in-out infinite;
-          }
-        `}
-      </style>
     </div>
   );
 };

@@ -3,12 +3,42 @@ import { Code, Palette, Cpu, Database, Globe, Smartphone } from "lucide-react";
 import { motion } from "framer-motion";
 
 const skills = [
-  { icon: <Code className="w-6 h-6" />, name: "MERN Stack Development", level: 100 },
-  { icon: <Database className="w-6 h-6" />, name: "Databases & Backend", level: 80 },
-  { icon: <Globe className="w-6 h-6" />, name: "Full-Stack Development", level: 85 },
-  { icon: <Smartphone className="w-6 h-6" />, name: "Mobile Development", level: 60 },
-  { icon: <Cpu className="w-6 h-6" />, name: "Programming", level: 95 },
-  { icon: <Palette className="w-6 h-6" />, name: "UI/UX Design", level: 75 },
+  {
+    icon: <Code className="w-6 h-6" />,
+    name: "MERN Stack Development",
+    level: 100,
+    technologies: ["MongoDB", "Express.js", "React", "Node.js"],
+  },
+  {
+    icon: <Database className="w-6 h-6" />,
+    name: "Databases & Backend",
+    level: 80,
+    technologies: ["MySQL", "PostgreSQL", "MongoDB", "REST APIs"],
+  },
+  {
+    icon: <Globe className="w-6 h-6" />,
+    name: "Full-Stack Development",
+    level: 85,
+    technologies: ["React", "Next.js", "Node.js", "GraphQL"],
+  },
+  {
+    icon: <Smartphone className="w-6 h-6" />,
+    name: "Mobile Development",
+    level: 60,
+    technologies: ["React Native", "Expo", "Flutter"],
+  },
+  {
+    icon: <Cpu className="w-6 h-6" />,
+    name: "Programming",
+    level: 95,
+    technologies: ["C++", "Java", "Python", "JavaScript"],
+  },
+  {
+    icon: <Palette className="w-6 h-6" />,
+    name: "UI/UX Design",
+    level: 75,
+    technologies: ["Figma", "Adobe XD", "Tailwind CSS"],
+  },
 ];
 
 // Circular Progress Component
@@ -112,7 +142,18 @@ const Skills: React.FC = () => {
             >
               {skill.icon}
             </motion.div>
+
+            {/* Skill Name */}
             <h3 className="text-xl font-semibold text-gray-800 text-center">{skill.name}</h3>
+
+            {/* Technologies List */}
+            <ul className="text-sm text-gray-600 text-center space-y-1">
+              {skill.technologies.map((tech, i) => (
+                <li key={i} className="bg-orange-50 px-3 py-1 rounded-full inline-block mx-1 text-orange-700 font-medium">
+                  {tech}
+                </li>
+              ))}
+            </ul>
           </motion.div>
         ))}
       </div>
