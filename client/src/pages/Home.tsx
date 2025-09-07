@@ -22,8 +22,9 @@ export default function Home() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [showError, setShowError] = useState(false); // Resume 404 modal
+  const [showError, setShowError] = useState(false);
 
+  // Typing Effect Logic
   useEffect(() => {
     const currentRole = roles[roleIndex];
     const typingSpeed = isDeleting ? 50 : 100;
@@ -46,169 +47,189 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, [charIndex, isDeleting, roleIndex, roles]);
 
-  const handleResumeClick = (e: React.MouseEvent) => {
+  const handleResumeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setShowError(true);
   };
 
   return (
-    <main className="pt-40 w-full h-screen flex items-start justify-center font-[Inter] mt-10">
+    <main className="pt-24 md:pt-36 w-full min-h-screen flex flex-col items-center justify-center font-[Inter]">
       <section
-        className="flex flex-col md:flex-row items-center justify-between w-full min-h-[80.5vh] px-8 md:px-20 py-20 rounded-tl-[3rem] rounded-tr-[3rem] overflow-hidden relative"
+        className="mt-8 flex flex-col md:flex-row items-center justify-between w-full min-h-[80vh] px-4 sm:px-6 md:px-16 lg:px-20 py-12 sm:py-16 rounded-tl-[2rem] rounded-tr-[2rem] overflow-hidden relative"
         style={{
-          background: "linear-gradient(180deg, #fb8c5c 0%, #f9cda3 100%)",
+          background:
+            "linear-gradient(180deg, #FFD4B8 0%, #FFB183 50%, #FF9555 100%)",
         }}
       >
-        {/* Left - Intro */}
-        <div className="flex-1 text-center md:text-left flex flex-col justify-center space-y-8">
+        {/* ===== Left Section ===== */}
+        <div className="flex-1 text-center md:text-left flex flex-col justify-center space-y-8 z-10">
           <div>
-            <h2 className="fade-in font-[Playfair_Display] text-5xl md:text-6xl font-extrabold leading-tight text-gray-900">
+            <h2 className="fade-in font-[Playfair_Display] text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight text-gray-900">
               Hi 👋, I’m{" "}
-              <span className="bg-gradient-to-r from-orange-600 via-pink-600 to-red-500 bg-clip-text text-transparent drop-shadow-sm">
+              <span className="bg-gradient-to-r from-orange-600 via-pink-500 to-red-400 bg-clip-text text-transparent drop-shadow-sm">
                 Harshit Aggarwal
-              </span>{" "}
+              </span>
             </h2>
 
             {/* Typing Effect */}
-            <p className="text-lg md:text-xl mt-3 font-medium text-gray-700 h-6 md:h-8">
+            <p className="text-base sm:text-lg md:text-xl mt-3 font-medium text-gray-800 h-6 md:h-8">
               {displayedText}
               <span className="blinking-cursor">|</span>
             </p>
 
-            <p className="fade-in delay-200 mt-6 text-lg md:text-xl text-gray-800/90 max-w-xl mx-auto md:mx-0 leading-relaxed font-medium">
+            <p className="fade-in delay-200 mt-6 text-sm sm:text-base md:text-lg text-gray-900/90 max-w-xl mx-auto md:mx-0 leading-relaxed font-medium">
               I’m a passionate developer who loves creating impactful{" "}
               <span className="text-orange-700 font-semibold">
                 web experiences
               </span>
               . I enjoy building{" "}
-              <span className="text-pink-700 font-semibold">
+              <span className="text-pink-600 font-semibold">
                 full-stack applications
               </span>{" "}
-              and designing{" "}
-              <span className="text-red-600 font-semibold">
+              and crafting{" "}
+              <span className="text-red-500 font-semibold">
                 user-friendly interfaces
               </span>
               .
             </p>
 
             {/* CTA Buttons */}
-            <div className="fade-in delay-300 flex justify-center md:justify-start space-x-4 mt-8">
+            <div className="fade-in delay-300 flex justify-center md:justify-start space-x-3 sm:space-x-4 mt-6 sm:mt-8">
               <a
                 href="/projects"
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 via-pink-500 to-red-500 text-white font-semibold shadow-lg animate-glow hover:shadow-xl hover:scale-105 transition-transform"
+                className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-gradient-to-r from-orange-500 via-pink-500 to-red-400 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-transform text-sm sm:text-base"
               >
                 View My Work
               </a>
               <a
                 href="/contact"
-                className="px-6 py-3 rounded-xl border-2 border-orange-400 text-orange-600 font-semibold bg-white/70 backdrop-blur-md hover:bg-orange-50 hover:scale-105 transition-transform"
+                className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl border-2 border-orange-300 text-orange-700 font-semibold bg-white/80 backdrop-blur-md hover:bg-orange-50 hover:scale-105 transition-transform text-sm sm:text-base"
               >
                 Let’s Connect
               </a>
             </div>
 
-            {/* Socials */}
-            <div className="fade-in delay-400 flex justify-center md:justify-start space-x-6 mt-8">
+            {/* Social Icons */}
+            <div className="fade-in delay-400 flex justify-center md:justify-start space-x-5 sm:space-x-6 mt-6 sm:mt-8">
               <a
                 href="https://www.linkedin.com/in/harshit-aggarwal100306/"
                 target="_blank"
-                className="text-gray-800 hover:text-orange-600 hover:scale-110 transition"
+                className="text-gray-800 hover:text-orange-500 hover:scale-110 transition"
               >
-                <Linkedin className="w-8 h-8" />
+                <Linkedin className="w-6 h-6 sm:w-8 sm:h-8" />
               </a>
               <a
                 href="https://github.com/HarshitAggarwal10"
                 target="_blank"
-                className="text-gray-800 hover:text-pink-600 hover:scale-110 transition"
+                className="text-gray-800 hover:text-pink-500 hover:scale-110 transition"
               >
-                <Github className="w-8 h-8" />
+                <Github className="w-6 h-6 sm:w-8 sm:h-8" />
               </a>
               <button
                 onClick={handleResumeClick}
-                className="text-gray-800 hover:text-red-600 hover:scale-110 transition"
+                className="text-gray-800 hover:text-red-500 hover:scale-110 transition"
               >
-                <Download className="w-8 h-8" />
+                <Download className="w-6 h-6 sm:w-8 sm:h-8" />
               </button>
             </div>
           </div>
 
-          {/* Tech Focus Card */}
-          <div className="tech-card w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl bg-white/80 backdrop-blur-lg border-2 border-transparent rounded-2xl shadow-xl p-4 sm:p-6 flex flex-col space-y-4 animate-slideIn relative overflow-hidden transition-all duration-300">
-            {/* Accent Line */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-red-500 rounded-t-2xl"></div>
-
-            {/* Card Heading */}
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 text-center md:text-left">
-              Tech Focus
+          {/* ===== Tech Focus Section ===== */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="w-full max-w-2xl relative"
+          >
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center md:text-left">
+              Technologies I Work With
             </h3>
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {[
+                {
+                  icon: (
+                    <Layers className="w-8 h-8 sm:w-10 sm:h-10 text-orange-600" />
+                  ),
+                  title: "Full Stack",
+                  desc: "Creating scalable apps with modern stacks.",
+                  color: "from-orange-500 to-pink-400",
+                },
+                {
+                  icon: (
+                    <Database className="w-8 h-8 sm:w-10 sm:h-10 text-pink-500" />
+                  ),
+                  title: "MERN Stack",
+                  desc: "Dynamic apps with Node.js backend.",
+                  color: "from-pink-500 to-red-400",
+                },
+                {
+                  icon: (
+                    <Code className="w-8 h-8 sm:w-10 sm:h-10 text-red-500" />
+                  ),
+                  title: "Programming",
+                  desc: "Clean, efficient, and maintainable code.",
+                  color: "from-red-500 to-orange-400",
+                },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ y: -10, scale: 1.05 }}
+                  className="group relative p-4 sm:p-6 rounded-2xl bg-white/40 backdrop-blur-xl shadow-lg border overflow-hidden cursor-pointer"
+                >
+                  {/* Gradient Glow */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-30 blur-2xl group-hover:opacity-50 transition`}
+                  ></div>
 
-            {/* Tech Items */}
-            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-orange-50 transition duration-300">
-              <div className="flex items-center space-x-3">
-                <Layers className="text-orange-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
-                <span className="font-semibold text-gray-800 text-sm sm:text-base md:text-lg">
-                  Full-Stack Development
-                </span>
-              </div>
-              <p className="max-h-0 overflow-hidden text-xs sm:text-sm md:text-base text-gray-600 transition-all duration-500 group-hover:max-h-20">
-                Building scalable applications from front-end to back-end with
-                modern tools and frameworks.
-              </p>
+                  <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+                    <div className="p-2 sm:p-3 rounded-full bg-white shadow-inner group-hover:shadow-lg transition">
+                      {item.icon}
+                    </div>
+                    <h4 className="text-base sm:text-lg font-bold text-gray-800">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-gray-600">
+                      {item.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-
-            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-pink-50 transition duration-300">
-              <div className="flex items-center space-x-3">
-                <Database className="text-pink-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110" />
-                <span className="font-semibold text-gray-800 text-sm sm:text-base md:text-lg">
-                  MERN Stack
-                </span>
-              </div>
-              <p className="max-h-0 overflow-hidden text-xs sm:text-sm md:text-base text-gray-600 transition-all duration-500 group-hover:max-h-20">
-                Expertise in MongoDB, Express.js, React, and Node.js for
-                end-to-end web solutions.
-              </p>
-            </div>
-
-            <div className="group flex flex-col space-y-1 cursor-pointer p-2 rounded-lg hover:bg-red-50 transition duration-300">
-              <div className="flex items-center space-x-3">
-                <Code className="text-red-600 w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:translate-y-1 group-hover:scale-110" />
-                <span className="font-semibold text-gray-800 text-sm sm:text-base md:text-lg">
-                  Programming & Problem Solving
-                </span>
-              </div>
-              <p className="max-h-0 overflow-hidden text-xs sm:text-sm md:text-base text-gray-600 transition-all duration-500 group-hover:max-h-20">
-                Strong foundation in algorithms, data structures, and
-                competitive coding challenges.
-              </p>
-            </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Right - Picture */}
-        <div className="flex-1 flex justify-center md:justify-end mt-12 md:mt-0 relative">
-          <div className="absolute inset-0 flex justify-center md:justify-end items-end">
-            <div className="w-80 md:w-[420px] h-[520px] rounded-3xl bg-gradient-to-tr from-pink-500 to-orange-400 opacity-30 blur-3xl"></div>
-          </div>
-
-          <img
+        {/* ===== Right Section - Profile Image Only ===== */}
+        <div className="flex-1 flex justify-center md:justify-end mt-10 md:mt-0 relative z-10">
+          {/* Profile Image */}
+          <motion.img
             src={Harshit}
             alt="Harshit Aggarwal portrait"
-            className="relative w-82 md:w-[400px] h-[505px] rounded-3xl object-cover shadow-[0_5px_25px_rgba(0,0,0,0.35)] border-4 border-white/30 animate-float"
+            className="relative 
+    w-64 sm:w-72 md:w-80 lg:w-[380px] 
+    h-auto 
+    rounded-3xl object-cover 
+    shadow-[0_5px_25px_rgba(0,0,0,0.25)] 
+    border-4 border-white/30 
+    z-10 
+    mt-6 sm:mt-4 md:-mt-8 lg:-mt-16 xl:-mt-24"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9 }}
           />
         </div>
       </section>
 
-      {/* ===== Resume 404 Error Modal ===== */}
+      {/* ===== Resume 404 Modal ===== */}
       <AnimatePresence>
         {showError && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full relative"
+              className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full relative border border-orange-200"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
@@ -222,24 +243,24 @@ export default function Home() {
               </button>
 
               <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-                  <AlertTriangle className="w-10 h-10 text-red-500" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-100 flex items-center justify-center">
+                  <AlertTriangle className="w-8 h-8 sm:w-10 sm:h-10 text-red-500" />
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-gray-800 text-center mb-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800 text-center mb-2">
                 404 Error
               </h2>
 
-              <p className="text-center text-gray-600 mb-6">
-                Oops! The resume file you are trying to download doesn’t exist right
-                now. Please check back later.
+              <p className="text-center text-gray-600 mb-6 text-sm sm:text-base">
+                Oops! The resume file you are trying to download doesn’t exist
+                right now. Please check back later.
               </p>
 
               <div className="flex justify-center">
                 <button
                   onClick={() => setShowError(false)}
-                  className="px-6 py-2 bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold rounded-full shadow hover:scale-105 transition-transform"
+                  className="px-4 sm:px-6 py-2 bg-gradient-to-r from-orange-400 to-pink-400 text-white font-semibold rounded-full shadow hover:scale-105 transition-transform text-sm sm:text-base"
                 >
                   Go Back
                 </button>
@@ -249,18 +270,14 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ===== Animations & Styles ===== */}
+      {/* ===== Custom Animations ===== */}
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600&display=swap');
 
-          @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-          }
-          .animate-float {
-            animation: float 5s ease-in-out infinite;
+          @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
           }
 
           .fade-in {
@@ -272,33 +289,11 @@ export default function Home() {
           .fade-in.delay-300 { animation-delay: 0.3s; }
           .fade-in.delay-400 { animation-delay: 0.4s; }
 
-          @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-
-          @keyframes glowPulse {
-            0% { box-shadow: 0 0 8px rgba(251,140,92,0.6), 0 0 15px rgba(249,205,163,0.4); }
-            50% { box-shadow: 0 0 16px rgba(249,83,109,0.8), 0 0 25px rgba(249,205,163,0.6); }
-            100% { box-shadow: 0 0 8px rgba(251,140,92,0.6), 0 0 15px rgba(249,205,163,0.4); }
-          }
-          .animate-glow {
-            animation: glowPulse 3s infinite ease-in-out;
-          }
-
-          @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-60px); }
-            to { opacity: 1; transform: translateX(0); }
-          }
-          .animate-slideIn {
-            animation: slideInLeft 1s ease-out forwards;
-          }
-
           .blinking-cursor {
             display: inline-block;
             margin-left: 2px;
             width: 1ch;
-            color: #ff4d4d;
+            color: #ff6b35;
             animation: blink 1s step-end infinite;
           }
           @keyframes blink {
