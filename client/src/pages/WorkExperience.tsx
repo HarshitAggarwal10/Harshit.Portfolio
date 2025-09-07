@@ -119,7 +119,7 @@ const experiences: Experience[] = [
 
 const WorkExperience: React.FC = () => {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-orange-100 via-white to-orange-50 px-4 sm:px-6 md:px-12 py-12 sm:py-16 mt-20">
+    <div className="min-h-screen w-full bg-gradient-to-b from-orange-100 via-white to-orange-50 px-4 sm:px-6 md:px-12 py-12 sm:py-16 mt-17">
       {/* Heading */}
       <motion.h1
         initial={{ opacity: 0, y: -30 }}
