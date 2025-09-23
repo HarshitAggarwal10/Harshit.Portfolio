@@ -10,6 +10,7 @@ import {
   Mail,
   Cpu,
   AlertTriangle,
+  GitBranch,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,6 +26,7 @@ export default function Navbar() {
     { name: "Projects", path: "/projects", icon: <FolderGit2 className="w-5 h-5" /> },
     { name: "Experience", path: "/work-experience", icon: <Briefcase className="w-5 h-5" /> },
     { name: "Skills", path: "/skills", icon: <Cpu className="w-5 h-5" /> },
+    { name: "Open Source", path: "/open-source", icon: <GitBranch className="w-5 h-5" /> },
     { name: "Contact", path: "/contact", icon: <Mail className="w-5 h-5" /> },
   ];
 
