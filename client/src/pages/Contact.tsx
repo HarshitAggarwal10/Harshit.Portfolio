@@ -39,7 +39,7 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
@@ -60,6 +60,8 @@ const Contact: React.FC = () => {
     } catch (error) {
       console.error("Contact form error:", error);
       alert("❌ Failed to send message. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
