@@ -1,3 +1,4 @@
+
 // OpenSourceContributions.tsx
 import { useEffect, useMemo, useState, type JSX } from "react";
 import { motion } from "framer-motion";
@@ -10,13 +11,8 @@ import {
   ExternalLink,
   AlertTriangle,
   GitBranch,
-  Code2,
   Users,
   TrendingUp,
-  Coffee,
-  Heart,
-  Wifi,
-  WifiOff,
 } from "lucide-react";
 
 type RepoInput = {
@@ -268,13 +264,11 @@ export default function OpenSourceContributions(): JSX.Element {
   const [filter, setFilter] = useState<
     "All" | "Feature" | "Bug Fix" | "Docs" | "Refactor" | "Test" | "Other"
   >("All");
-  const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
     setErrorGlobal(null);
-    setIsOnline(true);
 
     async function fetchWithRetry(url: string, retries = 2): Promise<Response> {
       for (let i = 0; i < retries; i++) {
@@ -383,7 +377,6 @@ export default function OpenSourceContributions(): JSX.Element {
         // Use fallback data when API fails
         const fallbackData = FALLBACK_DATA[input.repo];
         if (fallbackData) {
-          setIsOnline(false);
           return fallbackData;
         }
 
@@ -468,7 +461,13 @@ export default function OpenSourceContributions(): JSX.Element {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFE5D4] via-[#FFD1B7] to-[#FFB891]">
+      {/* Google Fonts Import */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+
       {/* Floating Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -477,46 +476,62 @@ export default function OpenSourceContributions(): JSX.Element {
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute top-40 right-20 w-16 h-16 bg-amber-200/30 rounded-full"
+          className="absolute top-40 right-20 w-16 h-16 bg-orange-300/30 rounded-full"
           animate={{ y: [0, 15, 0], x: [0, -10, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-40 left-1/4 w-12 h-12 bg-orange-300/30 rounded-full"
+          className="absolute bottom-40 left-1/4 w-12 h-12 bg-orange-400/30 rounded-full"
           animate={{ scale: [1, 1.2, 1], rotate: [0, -180, -360] }}
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
-      <div className="relative z-10 py-16 px-6 sm:px-12 lg:px-20 mt-10">
+      <div className="relative z-10 py-16 px-6 sm:px-12 lg:px-20 mt-16 font-inter">
         <div className="max-w-6xl mx-auto">
-          {/* Creative Header */}
+          {/* Enhanced Header */}
           <motion.div
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 bg-clip-text text-transparent">
-                Open Source Contributions
-              </span>
-            </motion.h1>
+            <div className="flex items-center justify-center space-x-4 mb-8">
+              <motion.div
+                className="p-4 rounded-2xl bg-gradient-to-r from-orange-500 to-pink-500 shadow-xl"
+                animate={{ rotate: [0, 5, -5, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Github className="w-8 h-8 text-white" />
+              </motion.div>
+              <div>
+                <motion.h1
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-orange-600 via-pink-600 to-red-500 bg-clip-text text-transparent font-playfair"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                >
+                  Open Source Contributions
+                </motion.h1>
+                <motion.p
+                  className="text-lg text-gray-600 mt-4 font-inter max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  Showcasing meaningful contributions to open source projects.
+                  Each repository tells a story of collaboration, learning, and
+                  growth
+                </motion.p>
+              </div>
+            </div>
 
-            <motion.p
-              className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              Showcasing meaningful contributions to open source projects. Each
-              repository tells a story of collaboration, learning, and growth.
-            </motion.p>
+            <motion.div
+              className="mt-6 w-24 h-1 bg-gradient-to-r from-orange-400 via-pink-400 to-red-400 mx-auto rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: 96 }}
+              transition={{ duration: 1, delay: 0.6 }}
+            />
           </motion.div>
 
           {/* Search & Filter Bar */}
@@ -524,7 +539,7 @@ export default function OpenSourceContributions(): JSX.Element {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="bg-white/70 backdrop-blur-sm rounded-3xl p-6 mb-12 shadow-lg border border-orange-200/50"
+            className="bg-white/70 backdrop-blur-xl rounded-3xl p-6 mb-12 shadow-lg border border-white/30"
           >
             <div className="flex flex-col sm:flex-row gap-4 items-center">
               <div className="relative flex-1 w-full">
@@ -537,7 +552,7 @@ export default function OpenSourceContributions(): JSX.Element {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search repositories..."
-                  className="w-full pl-12 pr-4 py-3 bg-white/80 border-2 border-orange-200 rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-orange-400 transition-colors"
+                  className="w-full pl-12 pr-4 py-3 bg-white/80 border-2 border-orange-200 rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-orange-400 transition-colors font-inter"
                 />
               </div>
 
@@ -549,7 +564,7 @@ export default function OpenSourceContributions(): JSX.Element {
                 <select
                   value={filter}
                   onChange={(e) => setFilter(e.target.value as typeof filter)}
-                  className="pl-10 pr-8 py-3 bg-white/80 border-2 border-orange-200 rounded-2xl text-gray-700 focus:outline-none focus:border-orange-400 appearance-none cursor-pointer transition-colors"
+                  className="pl-10 pr-8 py-3 bg-white/80 border-2 border-orange-200 rounded-2xl text-gray-700 focus:outline-none focus:border-orange-400 appearance-none cursor-pointer transition-colors font-poppins"
                 >
                   <option>All</option>
                   <option>Feature</option>
@@ -572,10 +587,10 @@ export default function OpenSourceContributions(): JSX.Element {
             >
               <Clock className="animate-spin text-orange-500" size={24} />
               <div className="text-center">
-                <div className="font-semibold text-lg">
+                <div className="font-semibold text-lg font-playfair">
                   Loading repositories...
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-600 font-inter">
                   Fetching latest data or using fallback content
                 </div>
               </div>
@@ -590,8 +605,10 @@ export default function OpenSourceContributions(): JSX.Element {
             >
               <AlertTriangle className="text-red-500" size={24} />
               <div>
-                <div className="font-semibold text-lg">Connection Issue</div>
-                <div className="text-sm">{errorGlobal}</div>
+                <div className="font-semibold text-lg font-playfair">
+                  Connection Issue
+                </div>
+                <div className="text-sm font-inter">{errorGlobal}</div>
               </div>
             </motion.div>
           )}
@@ -605,10 +622,10 @@ export default function OpenSourceContributions(): JSX.Element {
                 className="col-span-full p-12 bg-white/70 border-2 border-orange-200 rounded-3xl shadow-lg text-center"
               >
                 <Search className="mx-auto mb-4 text-orange-400" size={48} />
-                <h3 className="text-2xl font-bold text-gray-700 mb-2">
+                <h3 className="text-2xl font-bold text-gray-700 mb-2 font-playfair">
                   No repositories found
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 font-inter">
                   Try adjusting your search or filter settings
                 </p>
               </motion.div>
@@ -644,19 +661,19 @@ export default function OpenSourceContributions(): JSX.Element {
                   }}
                   className="group"
                 >
-                  <div className="relative bg-white border border-orange-200/60 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 h-full overflow-hidden">
+                  <div className="relative bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 h-full overflow-hidden">
                     {/* Gradient background accent */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500"></div>
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 via-orange-500 to-red-500"></div>
 
                     {/* Status indicators */}
                     <div className="absolute top-4 right-4 z-10">
                       {isCached && !c.isOfflineData && (
-                        <div className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium shadow-sm">
+                        <div className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium shadow-sm font-poppins">
                           ⚡ Cached
                         </div>
                       )}
                       {!c.isOfflineData && !isCached && (
-                        <div className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-medium shadow-sm">
+                        <div className="bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-medium shadow-sm font-poppins">
                           🔴 Live
                         </div>
                       )}
@@ -666,7 +683,7 @@ export default function OpenSourceContributions(): JSX.Element {
                       {/* Header Section */}
                       <div className="flex items-center gap-4 mb-6">
                         <div className="relative">
-                          <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:rotate-3 transition-all duration-300">
+                          <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:rotate-3 transition-all duration-300">
                             <Github className="w-7 h-7 text-white" />
                           </div>
                           <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm">
@@ -680,14 +697,14 @@ export default function OpenSourceContributions(): JSX.Element {
                             rel="noopener noreferrer"
                             className="group/link block"
                           >
-                            <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover/link:text-orange-600 transition-colors line-clamp-1">
+                            <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover/link:text-orange-600 transition-colors line-clamp-1 font-playfair">
                               {repo
                                 ? repo.full_name
                                 : `${c.input.owner}/${c.input.repo}`}
                             </h3>
                             <div className="flex items-center gap-1 text-gray-500 group-hover/link:text-orange-500 transition-colors">
                               <ExternalLink className="w-3 h-3" />
-                              <span className="text-xs font-medium">
+                              <span className="text-xs font-medium font-poppins">
                                 View Repository
                               </span>
                             </div>
@@ -696,7 +713,7 @@ export default function OpenSourceContributions(): JSX.Element {
                       </div>
 
                       {/* Description */}
-                      <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-2">
+                      <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-2 font-inter">
                         {repo?.description ||
                           "No description available for this repository"}
                       </p>
@@ -704,17 +721,17 @@ export default function OpenSourceContributions(): JSX.Element {
                       {/* Stats Row */}
                       {repo && (
                         <div className="flex items-center gap-2 mb-6 flex-wrap">
-                          <div className="bg-gradient-to-r from-yellow-100 to-amber-100 text-amber-800 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+                          <div className="bg-gradient-to-r from-orange-100 to-red-100 text-orange-800 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm">
                             <Star className="w-3 h-3 fill-current" />
                             {repo.stargazers_count?.toLocaleString() || 0}
                           </div>
                           {repo.language && (
-                            <div className="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5">
+                            <div className="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 font-jetbrains">
                               <div className="w-2 h-2 rounded-full bg-current"></div>
                               {repo.language}
                             </div>
                           )}
-                          <div className="bg-gradient-to-r from-orange-100 to-amber-100 text-orange-800 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                          <div className="bg-gradient-to-r from-orange-100 to-pink-100 text-orange-800 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5">
                             <span>{typeIcon}</span>
                             {type}
                           </div>
@@ -727,10 +744,12 @@ export default function OpenSourceContributions(): JSX.Element {
                           <div className="flex items-start gap-3">
                             <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                             <div>
-                              <p className="text-sm font-medium text-red-800 mb-1">
+                              <p className="text-sm font-medium text-red-800 mb-1 font-poppins">
                                 Error Loading Repository
                               </p>
-                              <p className="text-xs text-red-600">{c.error}</p>
+                              <p className="text-xs text-red-600 font-inter">
+                                {c.error}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -738,17 +757,17 @@ export default function OpenSourceContributions(): JSX.Element {
 
                       {/* Latest Commit Highlight */}
                       {latest && (
-                        <div className="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-lg p-4 mb-6">
+                        <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-lg p-4 mb-6">
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
                               <div className="w-6 h-6 bg-orange-400 rounded-full flex items-center justify-center">
                                 <TrendingUp className="w-3 h-3 text-white" />
                               </div>
-                              <span className="text-xs font-bold text-orange-800 uppercase tracking-wide">
+                              <span className="text-xs font-bold text-orange-800 uppercase tracking-wide font-poppins">
                                 Latest Commit
                               </span>
                             </div>
-                            <span className="text-xs text-gray-500 bg-white px-2 py-0.5 rounded-full">
+                            <span className="text-xs text-gray-500 bg-white px-2 py-0.5 rounded-full font-inter">
                               {formatDate(latest.date)}
                             </span>
                           </div>
@@ -756,19 +775,19 @@ export default function OpenSourceContributions(): JSX.Element {
                             href={latest.html_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block text-sm text-gray-800 hover:text-orange-600 transition-colors font-medium line-clamp-2 leading-relaxed"
+                            className="block text-sm text-gray-800 hover:text-orange-600 transition-colors font-medium line-clamp-2 leading-relaxed font-inter"
                             title={latest.message}
                           >
                             {latest.message}
                           </a>
                           {latest.author_name && (
                             <div className="flex items-center gap-2 mt-2">
-                              <div className="w-5 h-5 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center">
+                              <div className="w-5 h-5 bg-gradient-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center">
                                 <span className="text-white text-xs font-bold">
                                   {latest.author_name[0]?.toUpperCase()}
                                 </span>
                               </div>
-                              <span className="text-xs text-gray-600 font-medium">
+                              <span className="text-xs text-gray-600 font-medium font-inter">
                                 by {latest.author_name}
                               </span>
                             </div>
@@ -782,11 +801,11 @@ export default function OpenSourceContributions(): JSX.Element {
                           <>
                             <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
                               <GitBranch className="w-4 h-4 text-orange-500" />
-                              <h4 className="font-semibold text-gray-800 text-sm">
+                              <h4 className="font-semibold text-gray-800 text-sm font-poppins">
                                 Recent Activity
                               </h4>
                               <div className="flex-1"></div>
-                              <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
+                              <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full font-inter">
                                 {c.commits.length} commits
                               </span>
                             </div>
@@ -804,13 +823,13 @@ export default function OpenSourceContributions(): JSX.Element {
                                   animate={{ opacity: 1, y: 0 }}
                                   transition={{ delay: idx * 0.1 }}
                                 >
-                                  <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-amber-500 rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-sm flex-shrink-0">
+                                  <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-sm flex-shrink-0">
                                     {commit.author_name
                                       ? commit.author_name[0]?.toUpperCase()
                                       : "?"}
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <p className="text-sm text-gray-800 font-medium line-clamp-2 group-hover/commit:text-orange-700 transition-colors mb-1">
+                                    <p className="text-sm text-gray-800 font-medium line-clamp-2 group-hover/commit:text-orange-700 transition-colors mb-1 font-inter">
                                       {commit.message}
                                     </p>
                                     <div className="flex items-center text-xs text-gray-500 gap-3">
@@ -836,10 +855,10 @@ export default function OpenSourceContributions(): JSX.Element {
                               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
                                 <Clock className="w-8 h-8" />
                               </div>
-                              <p className="text-sm font-medium">
+                              <p className="text-sm font-medium font-poppins">
                                 No commits available
                               </p>
-                              <p className="text-xs mt-1">
+                              <p className="text-xs mt-1 font-inter">
                                 Check back later for updates
                               </p>
                             </div>
@@ -856,21 +875,21 @@ export default function OpenSourceContributions(): JSX.Element {
                             {repo.forks_count > 0 && (
                               <div className="flex items-center gap-1">
                                 <GitBranch className="w-3 h-3" />
-                                <span className="font-medium">
+                                <span className="font-medium font-inter">
                                   {repo.forks_count}
                                 </span>
                               </div>
                             )}
                             {repo.open_issues_count > 0 && (
                               <div className="flex items-center gap-1">
-                                <AlertTriangle className="w-3 h-3 text-amber-500" />
-                                <span className="font-medium">
+                                <AlertTriangle className="w-3 h-3 text-orange-500" />
+                                <span className="font-medium font-inter">
                                   {repo.open_issues_count}
                                 </span>
                               </div>
                             )}
                           </div>
-                          <div className="text-gray-500 font-medium">
+                          <div className="text-gray-500 font-medium font-inter">
                             Updated {formatDate(repo.updated_at)}
                           </div>
                         </div>
@@ -883,6 +902,82 @@ export default function OpenSourceContributions(): JSX.Element {
           </div>
         </div>
       </div>
+
+      {/* Enhanced Custom Styles */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-jetbrains { font-family: 'JetBrains Mono', monospace; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+          background: linear-gradient(to bottom, #FFE4D6, #FFD4B8);
+          border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(to bottom, #ff9555, #ffb183);
+          border-radius: 6px;
+          border: 2px solid #FFE4D6;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(to bottom, #ff7733, #ff9555);
+        }
+
+        /* Firefox Scrollbar */
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: #ff9555 #FFE4D6;
+        }
+
+        /* Smooth scrolling */
+        html {
+          scroll-behavior: smooth;
+        }
+
+        /* Better text rendering */
+        body {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+        }
+
+        /* Enhanced selection colors */
+        ::selection {
+          background-color: #ff9555;
+          color: white;
+        }
+        ::-moz-selection {
+          background-color: #ff9555;
+          color: white;
+        }
+
+        /* Enhanced focus styles */
+        *:focus {
+          outline: 2px solid #ff9555;
+          outline-offset: 2px;
+        }
+
+        /* Line clamping utilities */
+        .line-clamp-1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
     </div>
   );
 }
