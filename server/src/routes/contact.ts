@@ -1,39 +1,75 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
+import sgMail from "@sendgrid/mail";
 import Contact from "../models/Contact";
-import { sendMail } from "../utils/mailer";
 
 const router = Router();
 
-router.post("/", async (req, res): Promise<any> => {
+// Set SendGrid API Key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
+
+router.post("/", async (req: Request, res: Response): Promise<void> => {
+  const { name, email, message } = req.body;
+
+  // Validate required fields
+  if (!name || !email || !message) {
+    res.status(400).json({ success: false, message: "All fields are required." });
+    return;
+  }
+
   try {
-    const { name, email, message } = req.body;
+    // Save to MongoDB
+    await Contact.create({ name, email, message });
 
-    if (!name || !email || !message) {
-      return res.status(400).json({ success: false, msg: "All fields are required" });
-    }
+    /** ========================
+     * 1. Email to YOU
+     * ======================== */
+    const notifyOwner = {
+      to: process.env.SENDGRID_TO_EMAIL as string,
+      from: process.env.SENDGRID_FROM_EMAIL as string,
+      subject: `📩 New Contact Form Submission from ${name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #333;">
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <blockquote style="background:#f9f9f9; padding:10px; border-left:4px solid #ff6600;">
+            ${message}
+          </blockquote>
+        </div>
+      `,
+    };
 
-    // Save in DB
-    const newContact = new Contact({ name, email, message });
-    await newContact.save();
+    /** ========================
+     * 2. Confirmation Email to USER
+     * ======================== */
+    const confirmUser = {
+      to: email,
+      from: process.env.SENDGRID_FROM_EMAIL as string,
+      subject: `Thanks for contacting Harshit Aggarwal! 🙌`,
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #333;">
+          <h2>Hi ${name},</h2>
+          <p>Thank you for reaching out! I have received your message and will get back to you soon.</p>
+          <p><strong>Your message:</strong></p>
+          <blockquote style="background:#f9f9f9; padding:10px; border-left:4px solid #ff6600;">
+            ${message}
+          </blockquote>
+          <p>Warm regards,<br/><strong>Harshit Aggarwal</strong></p>
+        </div>
+      `,
+    };
 
-    // 1️⃣ Send mail to YOU with user details
-    await sendMail(
-      process.env.EMAIL_USER as string,
-      `📩 New Contact Form Submission from ${name}`,
-      `You received a new message via your portfolio:\n\nName: ${name}\nEmail: ${email}\nMessage:\n${message}`
-    );
+    // Send both emails simultaneously
+    await Promise.all([sgMail.send(notifyOwner), sgMail.send(confirmUser)]);
 
-    // 2️⃣ Send confirmation mail to USER
-    await sendMail(
-      email,
-      "✅ Thanks for contacting me!",
-      `Hi ${name},\n\nI’ve received your message:\n"${message}"\n\nI’ll get back to you soon!\n\nRegards,\nHarshit Aggarwal`
-    );
-
-    return res.status(201).json({ success: true, msg: "Message sent successfully" });
-  } catch (error) {
-    console.error("❌ Contact Route Error:", error);
-    return res.status(500).json({ success: false, error: "Server error. Please try again later." });
+    console.log("✅ Emails sent successfully!");
+    res.status(200).json({ success: true, message: "Message sent successfully!" });
+    return;
+  } catch (error: any) {
+    console.error("❌ SendGrid Error:", error.response?.body || error.message);
+    res.status(500).json({ success: false, message: "Failed to send message." });
+    return;
   }
 });
 

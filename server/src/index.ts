@@ -1,30 +1,31 @@
-import express from "express";
-import mongoose from "mongoose";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import contactRoutes from "./routes/contact";
+import mongoose from "mongoose";
+import contactRoute from "./routes/contact";
 
-dotenv.config(); // ✅ Load .env first
+dotenv.config();
 
-const app = express();
+const app: Application = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/contact", contactRoutes);
-
-const mongoUri = process.env.MONGO_URI;
-if (!mongoUri) {
-  throw new Error("❌ MONGO_URI is not defined in .env file");
-}
-else {
-  console.log(`✅ MONGO_URI is defined: ${mongoUri}`);
-}
-
+// MongoDB Connection
 mongoose
-  .connect(mongoUri)
-  .then(() => {
-    app.listen(process.env.PORT || 5000, () =>
-      console.log(`✅ Server running on http://localhost:${process.env.PORT || 5000}`)
-    );
-  })
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .connect(process.env.MONGO_URI as string)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Error:", err));
+
+// Routes
+app.use("/api/contact", contactRoute);
+
+app.get("/", (_req: Request, res: Response) => {
+  res.send("Portfolio backend is running successfully!");
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});

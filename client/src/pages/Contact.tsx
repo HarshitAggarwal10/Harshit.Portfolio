@@ -7,20 +7,22 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<null | "success" | "error">(null);
 
+  // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle form submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
 
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/contact`,
+      const response = await fetch(
+        "https://harshit-portfolio-htcj.onrender.com/api/contact",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -28,27 +30,26 @@ const Contact: React.FC = () => {
         }
       );
 
-      const data = await res.json();
-      if (data.success) {
+      const data = await response.json();
+
+      if (response.ok) {
         setStatus("success");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", message: "" }); // Reset form
       } else {
         setStatus("error");
+        console.error("Error:", data.message);
       }
-    } catch (err) {
+    } catch (error) {
+      console.error("Contact form error:", error);
       setStatus("error");
-      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div
-      className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-50 via-white to-orange-100 
-  px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 pb-10 overflow-hidden"
-    >
-      {/* Background blobs */}
+    <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-50 via-white to-orange-100 px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 pb-10 overflow-hidden">
+      {/* Floating animated background circles */}
       <motion.div
         className="absolute top-5 left-5 sm:top-10 sm:left-10 w-40 sm:w-60 h-40 sm:h-60 bg-orange-300/30 rounded-full blur-3xl"
         animate={{ y: [0, 20, 0] }}
@@ -66,7 +67,7 @@ const Contact: React.FC = () => {
         transition={{ duration: 0.7 }}
         className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 relative z-10"
       >
-        {/* Contact Info Card */}
+        {/* Contact Info Section */}
         <div className="bg-white/70 backdrop-blur-md rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col justify-center border border-orange-200">
           <h2 className="text-2xl sm:text-3xl font-bold text-orange-600 mb-3 sm:mb-4">
             Let’s Connect
@@ -85,6 +86,7 @@ const Contact: React.FC = () => {
             <a
               href="https://www.linkedin.com/in/harshit-aggarwal100306/"
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-3 text-gray-800 hover:text-orange-600 transition text-sm sm:text-base"
             >
               <Linkedin className="w-5 h-5 text-blue-600 flex-shrink-0" />
@@ -93,6 +95,7 @@ const Contact: React.FC = () => {
             <a
               href="https://github.com/HarshitAggarwal10"
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-3 text-gray-800 hover:text-orange-600 transition text-sm sm:text-base"
             >
               <Github className="w-5 h-5 text-gray-900 flex-shrink-0" />
@@ -156,20 +159,22 @@ const Contact: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="relative px-5 sm:px-6 py-2.5 sm:py-3 font-semibold rounded-xl border-2 border-orange-500 text-orange-600 hover:text-white hover:bg-orange-500 transition-all duration-300 shadow-md text-sm sm:text-base"
+            className={`relative px-5 sm:px-6 py-2.5 sm:py-3 font-semibold rounded-xl border-2 border-orange-500 
+              text-orange-600 hover:text-white hover:bg-orange-500 transition-all duration-300 shadow-md 
+              text-sm sm:text-base ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
 
-          {/* Status Message */}
+          {/* Success & Error Messages */}
           {status === "success" && (
             <p className="text-green-600 text-center font-medium mt-2 text-sm sm:text-base">
-              Your message has been sent!
+              ✅ Your message has been sent successfully!
             </p>
           )}
           {status === "error" && (
             <p className="text-red-600 text-center font-medium mt-2 text-sm sm:text-base">
-              Something went wrong. Try again later.
+              ❌ Something went wrong. Please try again later.
             </p>
           )}
         </form>
