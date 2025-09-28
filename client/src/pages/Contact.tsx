@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Mail, User, MessageSquare, Send, Github, Linkedin, Sparkles, Shield, Star, Wand2, CheckCircle, AlertTriangle, Clock } from "lucide-react";
+import { Mail, User, MessageSquare, Send, Github, Linkedin, Sparkles, Shield, Star, CheckCircle, AlertTriangle, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Contact: React.FC = () => {
@@ -90,19 +90,6 @@ const Contact: React.FC = () => {
           />
         ))}
       </div>
-
-      {/* Floating sparkles badge */}
-      <motion.div
-        className="absolute top-8 left-1/2 -translate-x-1/2 z-10"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur-md border border-white/60 shadow-sm">
-          <Wand2 className="w-4 h-4 text-orange-600" />
-          <span className="text-xs sm:text-sm text-gray-700">Polished with delightful micro-interactions</span>
-        </div>
-      </motion.div>
 
       {/* Decorative corner orbs */}
       <motion.div className="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-orange-300/20 blur-3xl" animate={{ x: [0, 20, 0] }} transition={{ duration: 10, repeat: Infinity }} />

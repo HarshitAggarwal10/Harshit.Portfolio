@@ -66,12 +66,12 @@ const projects = [
     desc: "A sophisticated portfolio and project showcase platform enabling developers and designers to present their work professionally with customizable templates and modern layouts.",
     link: "https://www.coderdesign.com/",
     tech: ["React", "Tailwind", "Node.js", "Express", "Next.js", "MongoDB"],
-    category: "Portfolio",
+    category: "Freelance",
     year: "2024"
   },
 ];
 
-const categories = ["All", "Full Stack", "Community", "Event Platform", "Education", "Portfolio"];
+const categories = ["All", "Full Stack", "Community", "Event Platform", "Education", "Freelance"];
 
 const techColors: { [key: string]: { bg: string; text: string; border: string } } = {
   React: { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200" },

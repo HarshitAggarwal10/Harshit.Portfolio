@@ -203,7 +203,7 @@ const About: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <div className="relative overflow-hidden w-full h-[22rem] sm:h-[26rem] md:h-[32rem] rounded-3xl bg-white/20 backdrop-blur-sm border border-white/30 shadow-2xl">
+            <div className="relative overflow-hidden w-full h-[22rem] sm:h-[26rem] md:h-[32rem] rounded-3xl">
               <motion.img
                 src={MyImage}
                 alt="Development Illustration"
@@ -216,7 +216,7 @@ const About: React.FC = () => {
               />
 
               {/* Glowing border effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-400/20 via-pink-400/20 to-red-400/20 blur-xl opacity-50" />
+              {/* <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-400/20 via-pink-400/20 to-red-400/20 blur-xl opacity-50" /> */}
             </div>
           </motion.div>
         </motion.div>
