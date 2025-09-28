@@ -1,75 +1,70 @@
+// src/routes/contact.ts
 import { Router, Request, Response } from "express";
-import sgMail from "@sendgrid/mail";
 import Contact from "../models/Contact";
+import { transporter } from "../mailer/transporter";
 
 const router = Router();
 
-// Set SendGrid API Key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
-
-router.post("/", async (req: Request, res: Response): Promise<void> => {
+router.post("/", async (req: Request, res: Response) => {
   const { name, email, message } = req.body;
 
-  // Validate required fields
-  if (!name || !email || !message) {
-    res.status(400).json({ success: false, message: "All fields are required." });
-    return;
+  const safeName = typeof name === "string" ? name.trim() : "";
+  const safeEmail = typeof email === "string" ? email.trim() : "";
+  const safeMessage = typeof message === "string" ? message.trim() : "";
+
+  if (!safeName || !safeEmail || !safeMessage) {
+    return res
+      .status(400)
+      .json({ success: false, msg: "All fields are required." });
   }
 
   try {
-    // Save to MongoDB
-    await Contact.create({ name, email, message });
+    await Contact.create({
+      name: safeName,
+      email: safeEmail,
+      message: safeMessage,
+      date: new Date(),
+    });
 
-    /** ========================
-     * 1. Email to YOU
-     * ======================== */
-    const notifyOwner = {
-      to: process.env.SENDGRID_TO_EMAIL as string,
-      from: process.env.SENDGRID_FROM_EMAIL as string,
-      subject: `📩 New Contact Form Submission from ${name}`,
+    const ownerMail = transporter.sendMail({
+      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
+      subject: `🚀 New Message from ${safeName}`,
       html: `
-        <div style="font-family: Arial, sans-serif; color: #333;">
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <blockquote style="background:#f9f9f9; padding:10px; border-left:4px solid #ff6600;">
-            ${message}
-          </blockquote>
-        </div>
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>Message:</strong></p>
+        <p>${safeMessage.replace(/\n/g, "<br/>")}</p>
       `,
-    };
+    });
 
-    /** ========================
-     * 2. Confirmation Email to USER
-     * ======================== */
-    const confirmUser = {
-      to: email,
-      from: process.env.SENDGRID_FROM_EMAIL as string,
-      subject: `Thanks for contacting Harshit Aggarwal! 🙌`,
+    const userMail = transporter.sendMail({
+      from: `"Harshit Aggarwal" <${process.env.EMAIL_USER}>`,
+      to: safeEmail,
+      subject: "Thanks for contacting me!",
       html: `
-        <div style="font-family: Arial, sans-serif; color: #333;">
-          <h2>Hi ${name},</h2>
-          <p>Thank you for reaching out! I have received your message and will get back to you soon.</p>
-          <p><strong>Your message:</strong></p>
-          <blockquote style="background:#f9f9f9; padding:10px; border-left:4px solid #ff6600;">
-            ${message}
-          </blockquote>
-          <p>Warm regards,<br/><strong>Harshit Aggarwal</strong></p>
-        </div>
+        <p>Hi ${safeName},</p>
+        <p>Thank you for reaching out. I have received your message and will get back to you shortly.</p>
+        <p><strong>Your message:</strong></p>
+        <blockquote>${safeMessage.replace(/\n/g, "<br/>")}</blockquote>
+        <p>Best regards,<br/>Harshit Aggarwal</p>
       `,
-    };
+    });
 
-    // Send both emails simultaneously
-    await Promise.all([sgMail.send(notifyOwner), sgMail.send(confirmUser)]);
+    await Promise.all([ownerMail, userMail]);
 
-    console.log("✅ Emails sent successfully!");
-    res.status(200).json({ success: true, message: "Message sent successfully!" });
-    return;
+    return res.status(200).json({
+      success: true,
+      msg:
+        "Message sent successfully! A confirmation email has been sent to the provided address.",
+    });
   } catch (error: any) {
-    console.error("❌ SendGrid Error:", error.response?.body || error.message);
-    res.status(500).json({ success: false, message: "Failed to send message." });
-    return;
+    console.error("❌ Contact form error:", error?.message || error);
+    return res.status(500).json({
+      success: false,
+      msg: "Failed to send message. Please try again later.",
+    });
   }
 });
 

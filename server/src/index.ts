@@ -1,19 +1,34 @@
+// src/index.ts
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config(); // Load env first
+
 import mongoose from "mongoose";
 import contactRoute from "./routes/contact";
-
-dotenv.config();
+import { verifyTransport } from "./mailer/transporter";
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Debug env safely
+console.log("Loaded ENV:", {
+  EMAIL_USER: process.env.EMAIL_USER,
+  EMAIL_PASS: process.env.EMAIL_PASS ? "******" : "MISSING",
+  MONGO_URI: process.env.MONGO_URI ? "SET" : "MISSING",
+});
 
-// MongoDB Connection
+// Middleware
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "*",
+    credentials: true,
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Mongo
 mongoose
   .connect(process.env.MONGO_URI as string)
   .then(() => console.log("✅ MongoDB Connected"))
@@ -23,9 +38,18 @@ mongoose
 app.use("/api/contact", contactRoute);
 
 app.get("/", (_req: Request, res: Response) => {
-  res.send("Portfolio backend is running successfully!");
+  res.json({
+    status: "Backend is running ✅",
+    timestamp: new Date().toISOString(),
+  });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(
+    `📧 Email service: ${
+      process.env.EMAIL_USER && process.env.EMAIL_PASS ? "✅ Configured" : "❌ Missing"
+    }`
+  );
+  await verifyTransport();
 });
