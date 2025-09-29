@@ -157,7 +157,7 @@ const About: React.FC = () => {
           transition={{ duration: 1 }}
         >
           {/* Left Section - About Me */}
-          <div className="w-full md:w-1/2 text-left">
+          <div className="w-full md:w-1/2 text-left mt-5">
             <div className="mb-6 md:mb-10">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
